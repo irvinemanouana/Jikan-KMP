@@ -2,6 +2,6 @@ package com.buildbychris.domain.common
 
 sealed class DomainResult <out T>{
     data class Success<out T>(val data : T) : DomainResult<T>()
-    data class Error(val massage : String) : DomainResult<Nothing>()
+    data class Error(val message : String) : DomainResult<Nothing>()
 }
 

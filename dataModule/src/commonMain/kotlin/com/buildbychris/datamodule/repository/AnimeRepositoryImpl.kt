@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.flow
 
 class AnimeRepositoryImpl(val client: HttpClient) : AnimeRepository {
     override fun getAllAnime(): Flow<DomainResult<List<Anime>>> = flow {
-        val response = client.get(ApiRoutes.ANIME.name)
+        val response = client.get(ApiRoutes.ANIME.path)
         when (response.status.isSuccess()) {
             true -> {
                 val body = response.body<PaginatedApiResponse<AnimeDto>>()

@@ -45,6 +45,9 @@ kotlin {
             implementation(libs.koin.compose.vm)
             implementation(libs.koin.core)
 
+            implementation(project(":dataModule"))
+            implementation(project(":domainModule"))
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
