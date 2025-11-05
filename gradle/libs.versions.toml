@@ -21,6 +21,7 @@ navigationCompose = "2.9.1"
 coilNetworkOkhttp = "3.3.0"
 datastore = "1.1.7"
 coroutines = "1.10.2"
+iconsLucide = "1.1.0"
 
 [libraries]
 #Android
@@ -46,7 +47,11 @@ ktor-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", versio
 
 #Image loader - COIL
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilNetworkOkhttp" }
-coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coilNetworkOkhttp" }
+coil-network-ktor3 = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilNetworkOkhttp" }
+
+#Image Vector
+icons-lucide = { module = "com.composables:icons-lucide", version.ref = "iconsLucide" }
 
 #DI - KOIN
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-version" }
@@ -80,3 +85,10 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 androidLint = { id = "com.android.lint", version.ref = "agp" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+[bundles]
+coil = [
+    "coil-compose",
+    "coil-compose-core",
+    "coil-network-ktor3"
+]

@@ -32,3 +32,4 @@ include(":composeApp")
 
 include(":dataModule")
 include(":domainModule")
+include(":designSystemModule")

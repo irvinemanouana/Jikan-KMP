@@ -11,7 +11,13 @@ data class AnimeDto(
     @SerialName("title")
     val title: String,
     @SerialName("images")
-    val images: AnimeImagesDto
+    val images: AnimeImagesDto,
+    @SerialName("year")
+    val year: Int?,
+    @SerialName("score")
+    val score: Double,
+    @SerialName("scored_by")
+    val scoreBy: Int
 )
 
 @Serializable
@@ -48,7 +54,10 @@ fun AnimeDto.toDomainAnime(): Anime {
     return Anime(
         id = id,
         title = title,
-        imageUrl = images.webp.imageUrl
+        imageUrl = images.webp.largeImageUrl,
+        year = year,
+        score = score,
+        scoreBy = scoreBy
 
     )
 }

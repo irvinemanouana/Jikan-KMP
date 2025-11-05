@@ -48,6 +48,7 @@ kotlin {
 
             implementation(project(":dataModule"))
             implementation(project(":domainModule"))
+            implementation(project(":designSystemModule"))
 
         }
         commonTest.dependencies {
