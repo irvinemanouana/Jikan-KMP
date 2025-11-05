@@ -20,6 +20,7 @@ koin-version = "4.1.1"
 navigationCompose = "2.9.1"
 coilNetworkOkhttp = "3.3.0"
 datastore = "1.1.7"
+coroutines = "1.10.2"
 
 [libraries]
 #Android
@@ -31,6 +32,9 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+
+#Coriutines
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
 #Http CLient - KTOR
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
