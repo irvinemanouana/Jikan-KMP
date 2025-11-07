@@ -126,7 +126,14 @@ class FakeAnimeRepository: AnimeRepository {
         when {
             shouldReturnError -> emit(DomainResult.Error("Failed to fetch anime"))
             shouldReturnEmpty -> emit(DomainResult.Success(emptyList()))
-            else -> emit(DomainResult.Success(listOf(Anime(id = 1, title = "Naruto", imageUrl = ""))))
+            else -> emit(DomainResult.Success(listOf(Anime(
+                id = 5114,
+                title = "Fullmetal Alchemist: Brotherhood",
+                imageUrl = "https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
+                year = 2009,
+                score = 9.10,
+                scoreBy = 2101990
+            ))))
         }
     }
 }

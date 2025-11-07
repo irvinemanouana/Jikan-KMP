@@ -4,18 +4,42 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.buildbychris.domain.anime.Anime
 import com.buildbychris.domain.anime.AnimeRepository
-import com.buildbychris.domain.common.DomainResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AnimeViewModel(
-    val animeRepository: AnimeRepository,
+    animeRepository: AnimeRepository,
     autoLoad: Boolean = true
 ) : ViewModel() {
-    private var _animeListState = MutableStateFlow<AnimeListUiState>(AnimeListUiState.Loading)
-    val animeListState = _animeListState.asStateFlow()
+
+    private val _state = MutableStateFlow(AnimeState())
+    val state = _state.asStateFlow()
+
+    val animePager = animeRepository.getAnimePages(
+        onLoadUpdated = { isLoading ->
+            _state.update {
+                it.copy(isLoading = isLoading)
+            }
+        },
+        onError = { error ->
+            _state.update {
+                it.copy(
+                    error = error?.message,
+                )
+            }
+        },
+        onSuccess = { result ->
+            _state.update {
+                it.copy(
+                    animeList = it.animeList + result.animeList,
+                    error = null,
+                )
+            }
+        }
+    )
+
 
     init {
         if (autoLoad) loadAnimeList()
@@ -23,28 +47,13 @@ class AnimeViewModel(
 
     fun loadAnimeList() {
         viewModelScope.launch {
-            animeRepository
-                .getAllAnime()
-                .onStart {
-                    _animeListState.value = AnimeListUiState.Loading
-                }.collect { result ->
-                    val state = when (result) {
-                        is DomainResult.Error -> {
-                            AnimeListUiState.Error(result.message)
-                        }
-
-                        is DomainResult.Success<List<Anime>> -> {
-                            AnimeListUiState.Success(animeList = result.data)
-                        }
-                    }
-                    _animeListState.value = state
-                }
+            animePager.loadNextItems()
         }
     }
 }
 
-sealed class AnimeListUiState {
-    object Loading : AnimeListUiState()
-    data class Success(val animeList: List<Anime>) : AnimeListUiState()
-    data class Error(val message: String) : AnimeListUiState()
-}
+data class AnimeState(
+    val animeList: List<Anime> = emptyList(),
+    val isLoading: Boolean = false,
+    val error: String? = null
+)
