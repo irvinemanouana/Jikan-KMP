@@ -23,9 +23,7 @@ data class AnimeDto(
 @Serializable
 data class AnimeImagesDto(
     @SerialName("jpg")
-    val jpg: Jpeg,
-    @SerialName("webp")
-    val webp: Webp
+    val jpg: Jpeg
 )
 
 
@@ -39,22 +37,12 @@ data class Jpeg(
     val largeImageUrl: String
 )
 
-@Serializable
-data class Webp(
-    @SerialName("image_url")
-    val imageUrl: String,
-    @SerialName("small_image_url")
-    val smallImageUrl: String,
-    @SerialName("large_image_url")
-    val largeImageUrl: String
-)
-
 
 fun AnimeDto.toDomainAnime(): Anime {
     return Anime(
         id = id,
         title = title,
-        imageUrl = images.webp.largeImageUrl,
+        imageUrl = images.jpg.largeImageUrl,
         year = year,
         score = score,
         scoreBy = scoreBy

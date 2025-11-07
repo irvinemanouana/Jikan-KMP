@@ -35,7 +35,7 @@ data class ApiHeaderResponseDto(
      * @property items The item count and pagination details
      */
     @SerialName("items")
-    val items: ItemsDto,
+    val items: ItemsDto?=null,
 
     /**
      * The highest page number that is currently visible/accessible.

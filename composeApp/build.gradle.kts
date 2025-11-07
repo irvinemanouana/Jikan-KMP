@@ -46,6 +46,12 @@ kotlin {
             implementation(libs.koin.compose.vm)
             implementation(libs.koin.core)
 
+            //Ktor
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.kotlinx.json)
+
             implementation(project(":dataModule"))
             implementation(project(":domainModule"))
             implementation(project(":designSystemModule"))
